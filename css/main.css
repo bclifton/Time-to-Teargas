@@ -2,6 +2,10 @@ body {
 	font: 11px sans-serif;
 }
 
+#graphic {
+	margin: 0 auto;
+}
+
 .axis path,
 .axis line {
 	fill: none;
@@ -33,12 +37,37 @@ body {
 	pointer-events: none;
 }
 
+.nytimes {
+	fill: rgba(0, 0, 0, 0.05);
+}
 
+.ap {
+	/*fill: rgba(239, 59, 53, 0.2);*/
+	fill: rgba(0, 0, 0, 0.05);
+}
 
+.reuters {
+	/*fill: rgba(252, 128, 36, 0.2);*/
+	fill: rgba(0, 0, 0, 0.05);
+}
 
+.guardian {
+	/*fill: rgba(51, 105, 217, 0.2);*/
+	fill: rgba(0, 0, 0, 0.05);
+}
 
+.event-label {
+	font-size: 8px;
+	/*fill: rgba(255,0,0,0.4);*/
+	fill: red;
+	text-anchor: end;
+}
 
-
+.brush .extent {
+	stroke: #fff;
+	fill-opacity: .125;
+	shape-rendering: crispEdges;
+}
 
 
 
