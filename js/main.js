@@ -52,6 +52,13 @@ function parseDate(date) {
 	return format.parse(date);
 }
 
+function processGDELT(gdelt) {
+	var processed = gdelt.forEach(function(d){
+		d.date = new Date(d.date);
+		d.smooth = +d.smooth;
+	});
+	return processed;
+}
 
 function addOverallIndex(data) {
 	// console.log(data);
@@ -60,23 +67,13 @@ function addOverallIndex(data) {
 	var newData = {};
 	_.each(data, function(d) {
 		date = roundDate(d.date);
-		// console.log(date);
+
 		var article = {};
 
 		article['headline'] = d.headline;
 		article['source'] = d.source;
 		article['url'] = d.web_url;
 		article['country_1'] = d.country_1;
-		// article['snippet'] = d.snippet;
-		// article['lead_paragraph'] = d.lead_paragraph;
-		// article['document_type'] = d.document_type;
-
-		// function checkParagraph()
-		// if (d.lead_paragraph === 'None') {
-		// 	article['snippet'] = d.snippet;
-		// } else {
-		// 	article['lead_paragraph'] = d.lead_paragraph;
-		// }
 
 		// if newData does not have date, 1st time through:
 		if(!_.has(newData, date)) {		
@@ -88,7 +85,6 @@ function addOverallIndex(data) {
 	});
 
 	// take the index of the atricle in the array, and add it to the article entry (this will be used for the y position):
-
 	_.each(newData, function(value, date) {
 		var countriesCounter = {};
 		_.each(value, function(entry, index) {
@@ -115,17 +111,8 @@ function addOverallIndex(data) {
 	return finalData;
 }
 
-function processGDELT(gdelt) {
-	var processed = gdelt.forEach(function(d){
-		d.date = new Date(d.date);
-		d.smooth = +d.smooth;
-	});
-	return processed;
-}
-
 
 function parseCountries(data, timeline, gdelt) {
-
 
 	var start = new Date('1997-4-29');
 	var end = new Date('2014-12-2');
@@ -133,7 +120,6 @@ function parseCountries(data, timeline, gdelt) {
 
 
 	var finalData = addOverallIndex(data);
-	// var finalGDELT = processGDELT(gdelt);
 
 	gdelt.forEach(function(d){
 		d.date = new Date(d.date);
@@ -141,182 +127,10 @@ function parseCountries(data, timeline, gdelt) {
 	});
 
 	drawGraph(finalData, timeline, gdelt, 'graphic1', 'All');
-	// loadData(countriesObj['egypt'], timeline, false, 'graphic1', 'Egypt');
-
-
-							// console.log(data);
-							// var worldArticles = [];
-							// var otherArticles = [];
-
-							// _.each(data, function(entry) {
-							// 	if (entry.section === 'world') {
-							// 		// console.log(entry.snippet);
-							// 		worldArticles.push(entry);
-							// 	} else {
-							// 		otherArticles.push(entry);
-							// 	}
-							// });
-
-	// var countriesObj = {};
-	// var others = [];
-
-	// _.each(data, function(entry) {
-		
-	// 	if(!_.has(countriesObj, entry.country_1)){
-	// 		countriesObj[entry.country_1] = [entry];
-	// 	} else {
-	// 		// console.log(countriesObj[entry.country_1]);
-	// 		countriesObj[entry.country_1].push(entry);
-	// 	}
-	// });
-
-	// // console.log('countries', countriesObj);
-	// // console.log('others', others);
-
-	// var newData = [];
-	// _.each(countriesObj, function(countryArticles, countryName) {
-	// 	// console.log('countryArticles:', countryArticles, 'countryName:', countryName);
-
-	// 	var temp = {};
-	// 	temp['name'] = countryName;
-	// 	temp['values'] = {};
-
-	// 	daterange.by('days', function(moment) {
-	// 		var day = moment.toDate();
-	// 		temp['values'][roundDate(day)] = 0;
-	// 	});
-
-	// 	_.each(countryArticles, function(entry) {
-	// 		// var article = {};
-	// 		var date = roundDate(entry.date);
-	// 		// article['date'] = date;
-
-	// 		temp['values'][date] += 1;
-
-	// 		// if (!_.has(temp['values'], date)) {
-	// 		// 	temp['values'][date] = 1;
-	// 		// } else {
-	// 		// 	temp['values'][date] += 1;
-	// 		// }
-	// 	});
-
-	// 	// switches values from object to array:
-	// 	var entries = [];
-	// 	_.each(temp['values'], function(value, key) {
-	// 		// console.log('values:', parseDate(key), value);
-			
-	// 		var obj = {'date': parseDate(key),
-	// 				   'count': value
-	// 				  };
-	// 		entries.push(obj);
-	// 	});
-	// 	temp['values'] = entries;
-
-	// 	newData.push(temp);
-	// });
-
-	// console.log(newData);
-
-
-	// // drawLineGraph(newData, timeline, '#graphic1');
-	// // loadData(worldArticles, timeline, gdelt);
-	// // loadData(others, timeline, gdelt, '#graphic1');
-	// // console.log(_.keys(countriesObj));
-
-
-
-
-	// loadData(data, timeline, gdelt, 'graphic0', 'All');
-
-	// // _.each(_.keys(countriesObj), function(name, index) {
-	// // 	// console.log(name, index);
-	// // 	loadData(countriesObj[name], timeline, gdelt, 'graphic'+index+1, name);
-	// // });
-
-	// loadData(countriesObj['egypt'], timeline, false, 'graphic1', 'Egypt');
-	// loadData(countriesObj['bahrain'], timeline, false, 'graphic2', 'Bahrain');
-	// loadData(countriesObj['syria'], timeline, false, 'graphic3', 'Syria');
-	// loadData(countriesObj['libya'], timeline, false, 'graphic4', 'Libya');
-	// loadData(countriesObj['tunisia'], timeline, false, 'graphic5', 'Tunisia');
-
-	// loadData(countriesObj['united states'], timeline, false, 'graphic6', 'United States');
-	// loadData(countriesObj['turkey'], timeline, false, 'graphic7', 'Turkey');
-	// loadData(countriesObj['hong kong'], timeline, false, 'graphic8', 'Hong Kong');
-	// loadData(countriesObj['greece'], timeline, false, 'graphic9', 'Greece');
 }
 
-
-
-
-function loadData(data, timeline, gdelt, target, name) {
-	// d3.csv('assets/teargasdata.csv', function(data) {
-		console.log(data);
-
-		// create the new dataset, sorted by date:
-		var newData = {};
-		_.each(data, function(d) {
-			date = roundDate(d.date);
-			// console.log(date);
-			var article = {};
-
-			article['headline'] = d.headline;
-			article['source'] = d.source;
-			article['url'] = d.web_url;
-			// article['snippet'] = d.snippet;
-			// article['lead_paragraph'] = d.lead_paragraph;
-			// article['document_type'] = d.document_type;
-
-			// function checkParagraph()
-			// if (d.lead_paragraph === 'None') {
-			// 	article['snippet'] = d.snippet;
-			// } else {
-			// 	article['lead_paragraph'] = d.lead_paragraph;
-			// }
-
-			// if newData does not have date, 1st time through:
-			if(!_.has(newData, date)) {		
-				newData[date] = [];
-				newData[date].push(article);
-			} else {
-				newData[date].push(article);
-			}	
-		});
-		// console.log(newData);
-
-		// take the index of the atricle in the array, and add it to the article entry (this will be used for the y position):
-		_.each(newData, function(value, date) {
-			_.each(value, function(entry, index) {
-				entry['article_country'] = index + 1;
-			});
-		});
-
-		// turn the data back into an array for D3:
-		var finalData = [];
-		_.each(newData, function(value, key) {	
-			_.each(value, function(entry) {
-				entry['date'] = parseDate(key);
-				finalData.push(entry);
-			});
-		});
-		// console.log(finalData);
-
-		console.log(gdelt);
-
-		if (gdelt) {
-			gdelt.forEach(function(d){
-				d.date = new Date(d.date);
-				d.smooth = +d.smooth;
-			});
-		}
-		
-
-		drawGraph(finalData, timeline, gdelt, target, name);
-		// drawLineGraph(finalData, timeline, target);
-	// }); // ends d3.tsv
-}
 
 function drawGraph(data, timeline, gdelt, target, title) {
-
 	// console.log(data);
 	// console.log(gdelt);
 
@@ -330,19 +144,12 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.domain([
 			new Date('1997-04-29'),
 			new Date('2014-12-02')
-			// d3.min(data, function(d) { return d.date; }),
-			// d3.max(data, function(d) { return d.date; })
 		])
 		.range([0, width]);
 
 	var y = d3.scale.linear()
-		.domain([
-			0,
-			35
-		])
+		.domain([0, 35])
 		.range([height, 0]);
-
-	
 
 	var xAxis = d3.svg.axis()
 	    .scale(x)
@@ -373,19 +180,17 @@ function drawGraph(data, timeline, gdelt, target, title) {
 	    .attr('y', 6)
 	    .attr('dy', '0.71em')
 	    .style('text-anchor', 'end')
-	    .text('Number of News Articles per Day');
+	    .text("Number of News Articles mentioning 'Tear Gas' per Day");
 
 	svg.call(tip);
 
-
-	svg.selectAll('rect')
+	var boxes = svg.selectAll('rect')
 		.data(data)
 		.enter()
 		.append('rect')
 		.attr('class', 'box')
 		.attr('x', function(d){ return x(d.date); })
 		.attr('y', function(d){ return y(d.article_total); })
-		// .attr('y', function(d){ return y(d.country_article_total); })
 		.attr('width', 2)
 		.attr('height', 8)
 		.style('fill', function(d) { 
@@ -394,7 +199,6 @@ function drawGraph(data, timeline, gdelt, target, title) {
 			} else {
 				return redScale[d.article_total];
 			}
-			// console.log(redScale[d.article_total]); 
 		})
 		.on('mouseover', tip.show)
 		.on('mouseout', tip.hide)
@@ -402,54 +206,36 @@ function drawGraph(data, timeline, gdelt, target, title) {
 
 
 
+	//////////////////////////////////////////////////////
+	// Buttons to change the countries
+	// In Progress...
+
+	// d3.selectAll(".button--all,.button--egypt")
+	// 	.on("click.position", function() {
+	// 		boxes.transition("position")
+	// 			.delay(function(d, i) { return i * 50; })
+	// 			.duration(750)
+	// 			.attr('y', function(d){ return y(d.country_article_total); });
+	// 			// .attr("cy", (togglePosition = !togglePosition) ? 100 : height - 100);
+	// 	});
+
+	// d3.selectAll(".button--all,.button--size")
+	// 	.on("click.size", function() {
+	// 		circle.transition("size")
+	// 		.delay(function(d, i) { return (n - 1 - i) * 50; })
+	// 		.duration(750)
+	// 		.attr("r", (toggleSize = !toggleSize) ? 50 : 10);
+	// 	});	
+
+
+
+	//////////////////////////////////////////////////////
+	// GDELT Protests line
+
 	var gline = d3.svg.line()
 		.interpolate('basis')
 		.x(function(d) { return x(d.date); })
 		.y(function(d) { return y(d.smooth); });
-
-	// var gdelt_group = svg.append('g')
-	// 	.attr('class', 'gdeltgroup');
-
-	// var gd = gdelt_group.selectAll('.gdelt')
-	// 	.datum(gdelt);
-
-	// gd.append('path')
-	// 	.datum(gdelt)
-	// 	.attr('class', 'gdelt')
-	// 	.attr('d', gline);
-
-
-
-	// gpath.append("text")
-	//     .datum(function(d) { 
-	//     	// console.log(d);
-	//     	return d[d.length-1]; 
-	//     })
-	//     .attr("transform", function(d) { 
-	//     	// console.log(d);
-	//     	return 'translate(800, 25)';
-	//     	// return "translate(" + x(d.date) + "," + y(d.smooth) + ")"; 
-	//     })
-	//     .attr("x", 3)
-	//     .attr("dy", ".35em")
-	//     // .style('z-index', '1000')
-	//     .text('Protests');
-
-
-	// d3.selectAll(".button--all,.button--position").on("click.position", function() {
-	//   circle.transition(checkbox.property("checked") ? "position" : null)
-	//       .delay(function(d, i) { return i * 50; })
-	//       .duration(750)
-	//       .attr("cy", (togglePosition = !togglePosition) ? 100 : height - 100);
-	// });
-
-	// d3.selectAll(".button--all,.button--size").on("click.size", function() {
-	//   circle.transition(checkbox.property("checked") ? "size" : null)
-	//       .delay(function(d, i) { return (n - 1 - i) * 50; })
-	//       .duration(750)
-	//       .attr("r", (toggleSize = !toggleSize) ? 50 : 10);
-	// });	
-
 
 	var gdelt_group = svg.append('g')
 		.attr('class', 'gdeltgroup');
@@ -459,10 +245,6 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.append('path')
 		.attr('class', 'gdelt')
 		.attr('d', gline);
-
-	// gdelt_group
-	// 	.datum(gdelt)
-	// 	.append('text')
 
 	gdelt_group
 	    .datum(function(d) { 
@@ -476,6 +258,7 @@ function drawGraph(data, timeline, gdelt, target, title) {
 	    .attr("x", 8)
 	    .attr("dy", ".35em")
 	    .text('Protests');
+
 
 	//////////////////////////////////////////////////////
 	// Vertical event lines
@@ -508,52 +291,55 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.text(function(d) {
 			return d.label;
 		});
+
+
+
 	//////////////////////////////////////////////////////
+	// Chart legend
 
+	svg.append('img')
+		.attr('src', 'img/legend.svg')
+		.attr('height', 80)
+		.attr('width', 20)
 
-	var legend = svg.append("g")
-		.attr("class", "legend")
-		.attr("x", w - 65)
-		.attr("y", 25)
-		.attr("height", 100)
-		.attr("width", 100);
+	// var legend = svg.append("g")
+	// 	.attr("class", "legend")
+	// 	.attr("x", width - 65)
+	// 	.attr("y", 25)
+	// 	.attr("height", 100)
+	// 	.attr("width", 100);
 
-	legend.selectAll('rect')
-		.data(dataset)
-		.enter()
-		.append("rect")
-		.attr("x", w - 65)
-		.attr("y", 25)
-		.attr("width", 10)
-		.attr("height", 10)
-		.style("fill", function(d) { 
-			return color_hash[dataset.indexOf(d)][1]
-		});
+	// legend.selectAll('rect')
+	// 	.data(dataset)
+	// 	.enter()
+	// 	.append("rect")
+	// 	.attr("x", width - 65)
+	// 	.attr("y", 25)
+	// 	.attr("width", 10)
+	// 	.attr("height", 10)
+	// 	.style("fill", function(d) { 
+	// 		return color_hash[dataset.indexOf(d)][1]
+	// 	});
 
-	legend.selectAll('text')
-		.data(dataset)
-		.enter()
-		.append("text")
-		.attr("x", w - 65)
-		.attr("y", 25)
-		.text(function(d) { 
-			return color_hash[dataset.indexOf(d)][0] + ": " + d;
-		});
+	// legend.selectAll('text')
+	// 	.data(dataset)
+	// 	.enter()
+	// 	.append("text")
+	// 	.attr("x", width - 65)
+	// 	.attr("y", 25)
+	// 	.text(function(d) { 
+	// 		return color_hash[dataset.indexOf(d)][0] + ": " + d;
+	// 	});
 
-	
 } // ends drawgraph()
 
 
 $(document).ready(function() {
-
 	queue()
-	    // .defer(d3.tsv, 'assets/teargasdata2.tsv')
 	    .defer(d3.tsv, 'assets/teargas_region-country1.tsv')
-		// .defer(d3.tsv, 'assets/20131001-20131231_nytimes_get-articles_output.tsv')
 	    .defer(d3.csv, 'assets/ProtestTimeline.csv')
 	    .defer(d3.csv, 'assets/GDELT-protests_smooth1.csv')
 	    .await(function(error, articles, timeline, gdelt) {
-	    	// loadData(articles, timeline, countries, gdelt);
 	    	parseCountries(articles, timeline, gdelt);
 	    });
 });
