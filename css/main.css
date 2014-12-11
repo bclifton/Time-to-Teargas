@@ -37,39 +37,79 @@ body {
 	pointer-events: none;
 }
 
+/*
 .nytimes {
 	fill: rgba(0, 0, 0, 0.05);
 }
 
 .ap {
-	/*fill: rgba(239, 59, 53, 0.2);*/
-	fill: rgba(0, 0, 0, 0.05);
+	fill: rgba(239, 59, 53, 0.2);
 }
 
 .reuters {
-	/*fill: rgba(252, 128, 36, 0.2);*/
-	fill: rgba(0, 0, 0, 0.05);
+	fill: rgba(252, 128, 36, 0.2);
 }
 
 .guardian {
-	/*fill: rgba(51, 105, 217, 0.2);*/
-	fill: rgba(0, 0, 0, 0.05);
+	fill: rgba(51, 105, 217, 0.2);
 }
 
+.iht {
+	fill: rgba(0, 255, 0, 0.2);
+}
+*/
+
+/*////////////////////////////*/
+.nytimes {
+	fill: rgba(0, 0, 0, 0.05);
+	/*fill: none;*/
+}
+
+.ap {
+	fill: rgba(0, 0, 0, 0.05);
+	/*fill: rgba(0, 0, 0, 0.05);*/
+}
+
+.reuters {
+	fill: rgba(0, 0, 0, 0.05);
+	/*fill: rgba(0, 0, 0, 0.05);*/
+}
+
+.guardian {
+	/*fill: none;*/
+	fill: rgba(0, 0, 0, 0.05);
+	/*fill: rgba(0, 0, 0, 0.05);*/
+}
+
+.iht {
+	fill: rgba(0, 0, 0, 0.05);
+}
+/*////////////////////////////*/
 .event-label {
 	font-size: 8px;
 	/*fill: rgba(255,0,0,0.4);*/
-	fill: red;
+	fill: rgb(193, 99, 13);
 	text-anchor: end;
 }
 
-.brush .extent {
+/*.brush .extent {
 	stroke: #fff;
 	fill-opacity: .125;
 	shape-rendering: crispEdges;
+}*/
+
+.box {
+	fill: rgba(206,39,37,1);
 }
 
+.gdelt {
+	/*stroke: rgba(193, 100, 15, 0.34);*/
+	/*stroke: rgba(255, 0, 0, 1);*/
+	stroke: rgba(0, 255, 0, 1);
+	fill: none;
+}
 
-
-
+path.line {
+	fill: none;
+}
 
