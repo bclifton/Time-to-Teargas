@@ -1,9 +1,54 @@
 body {
+	padding-top: 50px;
+	padding-bottom: 20px;
 	font: 11px sans-serif;
+	font-family: 'Droid Serif';
+}
+
+h1 {
+	font-size: 51px;
+}
+
+h4 {
+	font-family: 'Droid Sans';
+	font-weight: bold;
+}
+
+p {
+	color: rgb(110, 110, 110);
+	font-size: 14px;
+}
+
+a {
+	color: black;
+	text-decoration: underline;
+}
+
+.header {
+	text-align: center;
+}
+
+.container {
+	margin-bottom: 100px;
 }
 
 #graphic {
 	margin: 0 auto;
+	font-family: Droid Sans;
+}
+
+#graph_title {
+	margin-left: 40px;
+}
+
+#sources {
+	margin-left: 40px;
+	font-size: 10px;
+	line-height: 4px;
+}
+
+#sources p {
+	font-size: 10px;
 }
 
 .axis path,
@@ -37,58 +82,18 @@ body {
 	pointer-events: none;
 }
 
-/*
-.nytimes {
-	fill: rgba(0, 0, 0, 0.05);
+.article {
+	width: 540px;
+	margin: 10px auto;
+	font-size: 16px;
+	line-height: 1.4em;
 }
 
-.ap {
-	fill: rgba(239, 59, 53, 0.2);
-}
 
-.reuters {
-	fill: rgba(252, 128, 36, 0.2);
-}
-
-.guardian {
-	fill: rgba(51, 105, 217, 0.2);
-}
-
-.iht {
-	fill: rgba(0, 255, 0, 0.2);
-}
-*/
-
-/*////////////////////////////*/
-.nytimes {
-	fill: rgba(0, 0, 0, 0.05);
-	/*fill: none;*/
-}
-
-.ap {
-	fill: rgba(0, 0, 0, 0.05);
-	/*fill: rgba(0, 0, 0, 0.05);*/
-}
-
-.reuters {
-	fill: rgba(0, 0, 0, 0.05);
-	/*fill: rgba(0, 0, 0, 0.05);*/
-}
-
-.guardian {
-	/*fill: none;*/
-	fill: rgba(0, 0, 0, 0.05);
-	/*fill: rgba(0, 0, 0, 0.05);*/
-}
-
-.iht {
-	fill: rgba(0, 0, 0, 0.05);
-}
-/*////////////////////////////*/
 .event-label {
 	font-size: 8px;
-	/*fill: rgba(255,0,0,0.4);*/
-	fill: rgb(193, 99, 13);
+	/*fill: rgb(193, 99, 13);*/
+	fill: rgb(154, 154, 154);
 	text-anchor: end;
 }
 
@@ -104,9 +109,16 @@ body {
 
 .gdelt {
 	/*stroke: rgba(193, 100, 15, 0.34);*/
-	/*stroke: rgba(255, 0, 0, 1);*/
-	stroke: rgba(0, 255, 0, 1);
+	stroke: rgba(46, 170, 255, 0.7);
+	stroke-width: 3px;
+	/*stroke: rgba(0, 255, 0, 1);*/
 	fill: none;
+}
+
+.gdelt_label {
+	fill: rgba(46, 170, 255, 0.7);
+	font-family: 'Droid Sans';
+	font-weight: bold;
 }
 
 path.line {

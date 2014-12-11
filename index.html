@@ -11,14 +11,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-        </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -54,12 +49,34 @@
 
     <div class="container">
         <div class="col-md-12">
-            <!-- <h1>Don’t Listen, Just Gas the Protesters</h1> -->
-            <h1>...Just Gas the Protesters</h1>
-            <div id="graphics"></div>
-            <h4>News Articles Referencing Tear Gas, since it was outlawed in war on April 29, 1997 until December 2, 2014</h4>
+            <div class="header">
+                <!-- <h1>Don’t Listen, Just Gas the Protesters</h1> -->
+                <h1>Just Gas the Protesters</h1>
+                <p>by <a href='#' target='blank'>Brian Clifton</a> Dec. 11, 2014</p>
+            </div>
+            <hr>
+            <div class="article">
+                <p>
+                    For the past few weeks in the United States, hardly a day has gone by that police have not fired tear gas at a gathering of demonstrators. People have been attempting to bring awareness of the institutional racism that allows the police to shoot people (Michael Brown and 12-year-old Tamir Rice) or strangle them to death (Eric Garner) without indictment. Police department inventories across the country are <a href="http://www.nytimes.com/2014/08/15/us/ferguson-missouri-in-wake-of-clashes-calls-to-demilitarize-police.html?_r=0" target="blank">over-stocked with second-hand military weapons</a>, to the point where tear gas, which had previously been reserved for rioting, is now used regularly. 
+                </p>
+                <p>
+                    There’s something interesting about the recent rise in the use of tear gas, both in the United States and around the world: it wasn’t until countless canisters were fired at citizens during the Arab Spring that teargassing became an internationally common thing to do.
+                </p>
+            </div>
+            <br>
+            <hr>
+            <div id="graph_title">
+                <h4>News Articles Referencing Tear Gas, since it was outlawed in war on April 29, 1997 until December 2, 2014</h4>
+            </div>
 
-            <p>Source: The New York Times, Associated Press, Reuters, International Herald Tribune, the Guardian</p>
+
+            <div id="graphic"></div>
+            <div id="sources">
+                <p>Sources:</p> 
+                <p>News Articles mentioning 'tear gas': The New York Times, Associated Press, Reuters, International Herald Tribune, the Guardian</p>
+                <p>Protests: <a href="http://gdeltproject.org/" target="blank">GDELT</a></p>        
+            </div>
+        
             <div class="buttons">
               <button class="button button--position">Toggle Position</button>
               <button class="button button--size">Toggle Size</button>
@@ -68,24 +85,34 @@
                 <input type="checkbox" checked> Named Transitions
               </label>
             </div>
-            <p>
-                For the past few weeks in the United States, hardly a day has gone by that police have not fired tear gas at a gathering of demonstrators. People have been  attempting to bring awareness of the institutional racism that allows the police to shoot (Michael Brown) or strangle people to death (Eric Garner) without inditement. Police department inventories across the country are so stocked with second-hand military weapons, to the point where tear gas, which had previously been reserved for rioting, but now is used regularly.
-            </p>
-            <p>
-                And there’s something interesting about the recent rise in the use of tear gas, both in the United States and around the world: it wasn’t until countless canisters were fired upon the Egyptian citizens during the Arab Spring that teargassing became an internationally common thing to do.
-            </p>
-            <p>
-                As citizens, we watched the people of these Middle Eastern countries revolt against their oppressive governments, hoping to form a democratic government modeled after ours. Governments around the world, however, were taking notes on what to do to protesters domestically.
-            </p>
-            <p>
-                In Hong Kong, people voicing outrage against a corrupt political process, instead of government officials meeting with their citizens, they treated them as 
-                In Greece, citizens upset with national financial policies that plunged massive portions of the population into economic emaciation.
-                In Turkey, when a tiny park in the center of Istanbul became the symbol of the
-                And here in the United States, when after a long and hateful legacy of the institutional oppression of black people becomes crystal clear with our systems designed to preserve justice are used to excuse police 
-            </p>
-            <p>
-                And tear gas is just one tool in the arsenal of weapons to use against the weak.
-            </p>
+
+            
+            <hr>
+            <div class="article">
+                <p>
+                    As citizens, we watched the people of these Middle Eastern countries revolt against their oppressive governments, hoping to form a democratic government. Police departments and military forces around the world, however, were taking notes on what to do to protesters domestically.
+                </p>
+                <p>
+                    Since the Arab Spring, there has been dramatically increased usage of tear gas around the world, and this is not because there have been more protests. In fact, the number of protests around the world has been consistent since the beginning of 2011, and occurrences have not been increasing since 1997. Teargassing has become the default response to protestation.
+                </p>
+                <p>
+                    Governments around the world while convening at the Chemical Weapons Convention in 1993 agreed that tear gas is a chemical weapon along with sarin and mustard gas, and outlawed its use against enemy forces in war. However, <a href="http://www.opcw.org/protection/types-of-chemical-agent/riot-control-agents/
+" target="blank">the right was reserved to use it against citizens</a>.
+                </p>            
+                <p>
+                   The widespread use of this tactic against citizens is unacceptable. There are other ways to address people who are beyond frustrated, such as listening and understanding their complaints. Firing chemical weapons at crowds of people here in the United States who are protected under the First Amendment to peacefully assemble is not enforcing the law, it is state-sanctioned violence used to terrorize its critics. 
+                </p>    
+                <p>
+                    Not only that, imagine the type of world we would live in if you disagreed with someone, they would be granted the right to snuff you out by firing a soda can-sized canister at your chest to silence you. And if you weren’t hospitalized or <a href="http://www.theguardian.com/world/2011/oct/26/occupy-oakland-veteran-critical-condition" target="blank">killed</a> by the canister bluntly smashing your bones, <a href="http://www.businessinsider.com/side-effects-of-ferguson-tear-gas-can-kill-2014-8" target="blank">you’d probably feel intense pain, either from the shrapnel from the explosion of the canister or from your body reacting to the air-borne toxins, you also might require amputation</a>. If you have <a href="http://physiciansforhumanrights.org/press/press-releases/bahrain-uses-tear-gas-as-lethal-weapon.html" target="blank">asthma, a heart condition, you would have to be rushed to a hospital because you would be at risk of dying</a>. If you are pregnant, you might miscarry.
+                </p>
+                <p>
+                   At the very least, you would be coughing, choking, crying to the point where you can no longer see. <a href="http://physiciansforhumanrights.org/press/press-releases/phr-documents-unlawful-use-of-force-and-tear-gas-and-attacks-on-medical-community-in-turkey.html" target="blank">The long-term consequence of exposure to tear gas are unknown because they have not been studied</a>. 
+                </p>
+                <p>
+                    When massive groups of people are not given the chance to speak, it’s hard to tell the difference between totalitarianism and democracy. 
+                </p>
+            </div>
+
         </div>
         
 
