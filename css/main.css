@@ -15,6 +15,7 @@ h4 {
 }
 
 p {
+
 	color: rgb(110, 110, 110);
 	font-size: 14px;
 }
@@ -22,6 +23,10 @@ p {
 a {
 	color: black;
 	text-decoration: underline;
+}
+
+ul {
+	list-style: none;
 }
 
 .header {
@@ -34,7 +39,7 @@ a {
 
 #graphic {
 	margin: 0 auto;
-	font-family: Droid Sans;
+	font-family: 'Droid Sans' !important;
 }
 
 #graph_title {
@@ -49,6 +54,11 @@ a {
 
 #sources p {
 	font-size: 10px;
+}
+
+#legend {
+	position: relative;
+	top: -285px;
 }
 
 .axis path,
@@ -95,6 +105,14 @@ a {
 	/*fill: rgb(193, 99, 13);*/
 	fill: rgb(154, 154, 154);
 	text-anchor: end;
+	text-shadow:0px 3px 1px rgba(255, 255, 255, 1), 
+				0px 3px 5px rgba(255, 255, 255, 1),
+				3px 0px 1px rgba(255, 255, 255, 1),
+				3px 0px 5px rgba(255, 255, 255, 1), 
+				-3px 0px 1px rgba(255, 255, 255, 1),
+				-3px 0px 5px rgba(255, 255, 255, 1), 
+				0px -3px 1px rgba(255, 255, 255, 1),
+				0px -3px 5px rgba(255, 255, 255, 1)
 }
 
 /*.brush .extent {
@@ -125,3 +143,11 @@ path.line {
 	fill: none;
 }
 
+button {
+	margin: 2px;
+}
+
+.buttons {
+	margin: 15px;
+	font-family: 'Droid Sans';
+}

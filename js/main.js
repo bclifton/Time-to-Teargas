@@ -180,7 +180,7 @@ function drawGraph(data, timeline, gdelt, target, title) {
 	    .attr('y', 6)
 	    .attr('dy', '0.71em')
 	    .style('text-anchor', 'end')
-	    .text("Number of News Articles mentioning 'Tear Gas' per Day");
+	    .text('News Articles mentioning "Tear Gas" per Day');
 
 	svg.call(tip);
 
@@ -188,7 +188,7 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.data(data)
 		.enter()
 		.append('rect')
-		.attr('class', 'box')
+		.attr('class', function(d){ return 'box ' + d.country_1; })
 		.attr('x', function(d){ return x(d.date); })
 		.attr('y', function(d){ return y(d.article_total); })
 		.attr('width', 2)
@@ -206,27 +206,271 @@ function drawGraph(data, timeline, gdelt, target, title) {
 
 
 
+
 	//////////////////////////////////////////////////////
 	// Buttons to change the countries
-	// In Progress...
 
-	// d3.selectAll(".button--all,.button--egypt")
-	// 	.on("click.position", function() {
-	// 		boxes.transition("position")
-	// 			.delay(function(d, i) { return i * 50; })
-	// 			.duration(750)
-	// 			.attr('y', function(d){ return y(d.country_article_total); });
-	// 			// .attr("cy", (togglePosition = !togglePosition) ? 100 : height - 100);
-	// 	});
+	d3.selectAll('.button--all')
+		.on('click.position', function() {
+			boxes.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d){ return y(d.article_total); })
+				.style('fill', function(d) { 
+					if (d.article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.article_total];
+					}
+				});
+		});
 
-	// d3.selectAll(".button--all,.button--size")
-	// 	.on("click.size", function() {
-	// 		circle.transition("size")
-	// 		.delay(function(d, i) { return (n - 1 - i) * 50; })
-	// 		.duration(750)
-	// 		.attr("r", (toggleSize = !toggleSize) ? 50 : 10);
-	// 	});	
+	d3.selectAll('.button--egypt')
+		.on('click.position', function() {
 
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.egypt')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+
+	d3.selectAll('.button--united-states')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.states')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+
+	d3.selectAll('.button--hong-kong')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.kong')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+
+	d3.selectAll('.button--tunisia')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.tunisia')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+
+	d3.selectAll('.button--greece')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.greece')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+
+	d3.selectAll('.button--turkey')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.turkey')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+
+	d3.selectAll('.button--israel-palestine')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.israel-palestine')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+
+	d3.selectAll('.button--south-africa')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.africa')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+	d3.selectAll('.button--china')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.china')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+	d3.selectAll('.button--united-kingdom')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.kingdom')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+	d3.selectAll('.button--iran')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.iran')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
+	d3.selectAll('.button--brazil')
+		.on('click.position', function() {
+
+			boxes.transition('position')
+				.attr('height', 0);
+
+			d3.selectAll('.brazil')
+				.transition('position')
+				.attr('height', 8)
+				.attr('y', function(d) {
+					return y(d.country_article_total);
+				})
+				.style('fill', function(d) { 
+					if (d.country_article_total > 10) {
+						return 'rgba(206,39.37,1)';
+					} else {
+						return redScale[d.country_article_total];
+					}
+				});
+		});
 
 
 	//////////////////////////////////////////////////////
@@ -280,6 +524,14 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.style('stroke', 'rgba(0,0,0,0.1)')
 		.style('fill', 'none');
 
+	eventDate.append('rect')
+		.attr('x', 0)
+		.attr('y', function(d) {
+			return x(new Date(d.date));
+		})
+		.attr('width', 10)
+		.attr('height', 50)
+		.attr('fill', 'rgba(255,255,255,0.5)');
 	eventDate.append('text')
 		.attr('class', 'event-label')
 		.attr('transform', 'rotate(-90)')
@@ -297,39 +549,12 @@ function drawGraph(data, timeline, gdelt, target, title) {
 	//////////////////////////////////////////////////////
 	// Chart legend
 
-	svg.append('img')
-		.attr('src', 'img/legend.svg')
-		.attr('height', 80)
-		.attr('width', 20)
-
-	// var legend = svg.append("g")
-	// 	.attr("class", "legend")
-	// 	.attr("x", width - 65)
-	// 	.attr("y", 25)
-	// 	.attr("height", 100)
-	// 	.attr("width", 100);
-
-	// legend.selectAll('rect')
-	// 	.data(dataset)
-	// 	.enter()
-	// 	.append("rect")
-	// 	.attr("x", width - 65)
-	// 	.attr("y", 25)
-	// 	.attr("width", 10)
-	// 	.attr("height", 10)
-	// 	.style("fill", function(d) { 
-	// 		return color_hash[dataset.indexOf(d)][1]
-	// 	});
-
-	// legend.selectAll('text')
-	// 	.data(dataset)
-	// 	.enter()
-	// 	.append("text")
-	// 	.attr("x", width - 65)
-	// 	.attr("y", 25)
-	// 	.text(function(d) { 
-	// 		return color_hash[dataset.indexOf(d)][0] + ": " + d;
-	// 	});
+	// d3.select('#graphic')
+	// 	.append('img')
+	// 	.attr('src', 'img/legend3.svg')
+	// 	.attr('id', 'legend')
+	// 	.attr('height', 100)
+	// 	.attr('width', 80);
 
 } // ends drawgraph()
 
