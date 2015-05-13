@@ -61,7 +61,6 @@ function processGDELT(gdelt) {
 }
 
 function addOverallIndex(data) {
-	// console.log(data);
 
 	// create the new dataset, sorted by date:
 	var newData = {};
@@ -70,10 +69,10 @@ function addOverallIndex(data) {
 
 		var article = {};
 
-		article['headline'] = d.headline;
-		article['source'] = d.source;
-		article['url'] = d.web_url;
-		article['country_1'] = d.country_1;
+		article.headline = d.headline;
+		article.source = d.source;
+		article.url = d.web_url;
+		article.country_1 = d.country_1;
 
 		// if newData does not have date, 1st time through:
 		if(!_.has(newData, date)) {		
@@ -88,13 +87,13 @@ function addOverallIndex(data) {
 	_.each(newData, function(value, date) {
 		var countriesCounter = {};
 		_.each(value, function(entry, index) {
-			entry['article_total'] = index + 1;
-			if (_.has(countriesCounter, entry['country_1'])) {
-				countriesCounter[entry['country_1']] += 1;	
+			entry.article_total = index + 1;
+			if (_.has(countriesCounter, entry.country_1)) {
+				countriesCounter[entry.country_1] += 1;	
 			} else {
-				countriesCounter[entry['country_1']] = 1;
+				countriesCounter[entry.country_1] = 1;
 			}
-			entry['country_article_total'] = countriesCounter[entry['country_1']];
+			entry.country_article_total = countriesCounter[entry.country_1];
 		});
 	});
 
@@ -102,7 +101,7 @@ function addOverallIndex(data) {
 	var finalData = [];
 	_.each(newData, function(value, key) {	
 		_.each(value, function(entry) {
-			entry['date'] = parseDate(key);
+			entry.date = parseDate(key);
 			finalData.push(entry);
 		});
 	});
@@ -134,10 +133,11 @@ function drawGraph(data, timeline, gdelt, target, title) {
 	// console.log(data);
 	// console.log(gdelt);
 
-	var tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d.headline; });
+	var svgWidth = $('#graphic').width();
+	// var tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d.headline; });
 
 	var margin = {top: 20, right: 60, bottom: 30, left: 40};
-	var width = 1000 - margin.left - margin.right;
+	var width = svgWidth - margin.left - margin.right;
 	var height = 350 - margin.top - margin.bottom;
 
 	var x = d3.time.scale()
@@ -161,7 +161,7 @@ function drawGraph(data, timeline, gdelt, target, title) {
 	    .orient("left");
 
 	var svg = d3.select('#graphic').append("svg")
-	    .attr("width", width + margin.left + margin.right)
+	    .attr("width", svgWidth + margin.left + margin.right)
 	    .attr("height", height + margin.top + margin.bottom)
 		.append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -180,9 +180,9 @@ function drawGraph(data, timeline, gdelt, target, title) {
 	    .attr('y', 6)
 	    .attr('dy', '0.71em')
 	    .style('text-anchor', 'end')
-	    .text('News Articles mentioning "Tear Gas" per Day');
+	    .text('Number of Articles mentioning "Tear Gas" per Day');
 
-	svg.call(tip);
+	// svg.call(tip);
 
 	var boxes = svg.selectAll('rect')
 		.data(data)
@@ -193,17 +193,17 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.attr('y', function(d){ return y(d.article_total); })
 		.attr('width', 2)
 		.attr('height', 8)
-		.style('fill', function(d) { 
+		.style('fill', function(d) {
+			// console.log('article_total: ', d.article_total);
 			if (d.article_total > 10) {
 				return 'rgba(206,39.37,1)';
 			} else {
 				return redScale[d.article_total];
 			}
 		})
-		.on('mouseover', tip.show)
-		.on('mouseout', tip.hide)
+		// .on('mouseover', tip.show)
+		// .on('mouseout', tip.hide)
 		;
-
 
 
 
@@ -516,7 +516,7 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.data(timeline)
 		.enter();
 
-	eventDate.append('line')
+	var eventLine = eventDate.append('line')
 		.attr('x1', function(d){ return x(new Date(d.date)); })
 		.attr('y1', 0)
 		.attr('x2', function(d){ return x(new Date(d.date)); })
@@ -524,7 +524,7 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.style('stroke', 'rgba(0,0,0,0.1)')
 		.style('fill', 'none');
 
-	eventDate.append('rect')
+	var eventDateRect = eventDate.append('rect')
 		.attr('x', 0)
 		.attr('y', function(d) {
 			return x(new Date(d.date));
@@ -532,7 +532,7 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.attr('width', 10)
 		.attr('height', 50)
 		.attr('fill', 'rgba(255,255,255,0.5)');
-	eventDate.append('text')
+	var eventDateText = eventDate.append('text')
 		.attr('class', 'event-label')
 		.attr('transform', 'rotate(-90)')
 		.attr('x', 0)
@@ -545,6 +545,48 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		});
 
 
+
+	d3.select(window).on('resize', resize);
+
+	function resize() {
+		width = parseInt(d3.select('#graphic').style('width'), 10);
+		width = width - margin.left - margin.right;
+
+		console.log(width);
+
+		x.range([0, width]);
+		d3.select('svg')
+			.attr('width', width + margin.left + margin.right);
+
+		svg.select('.x.axis').call(xAxis);
+
+		boxes
+			.attr('x', function(d){ return x(d.date); });
+		if (width < 700) {
+			boxes.attr('width', 1);
+		} else {
+			boxes.attr('width', 2);
+		}
+
+		eventLine
+			.attr('x1', function(d){ return x(new Date(d.date)); })
+			.attr('x2', function(d){ return x(new Date(d.date)); });
+
+		eventDateRect
+			.attr('y', function(d) { return x(new Date(d.date)); });
+
+		eventDateText
+			.attr('y', function(d) { return x(new Date(d.date)); });
+
+		d3.select('.gdelt')
+			.attr('d', gline);
+
+		d3.select('.gdelt_label')
+		    .attr("transform", function(d) { 
+		    	return "translate(" + x(d.date) + "," + y(d.smooth) + ")"; 
+		    });
+
+	}
 
 	//////////////////////////////////////////////////////
 	// Chart legend
@@ -567,7 +609,10 @@ $(document).ready(function() {
 	    .await(function(error, articles, timeline, gdelt) {
 	    	parseCountries(articles, timeline, gdelt);
 	    });
+
+	$('.button').click(function() {
+		$('.button').removeClass('clicked');
+		$(this).addClass('clicked');
+	})
 });
-
-
 
