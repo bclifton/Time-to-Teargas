@@ -2,7 +2,7 @@ body {
 	padding-top: 50px;
 	padding-bottom: 20px;
 	font: 11px sans-serif;
-	font-family: 'Source Sans Pro';
+	font-family: 'Droid Serif';
 	background-color: #f6f6f6;
 }
 
@@ -11,13 +11,13 @@ h1 {
 }
 
 h4 {
-	font-family: 'Source Sans Pro';
+	font-family: 'Droid Sans';
 	font-weight: bold;
 }
 
 p {
-	font-family: 'Source Sans Pro';
-	color: rgb(172, 172, 172);
+
+	color: rgb(110, 110, 110);
 	font-size: 14px;
 }
 
@@ -41,7 +41,7 @@ ul {
 
 #graphic {
 	margin: 0 auto;
-	font-family: 'Source Sans Pro' !important;
+	font-family: 'Droid Sans' !important;
 }
 
 #graph_title {
@@ -61,10 +61,6 @@ ul {
 #legend {
 	position: relative;
 	top: -285px;
-}
-
-text {
-  font-size: 11px;
 }
 
 .axis path,
@@ -141,7 +137,7 @@ text {
 
 .gdelt_label {
 	fill: rgba(46, 170, 255, 0.7);
-	font-family: 'Source Sans Pro';
+	font-family: 'Droid Sans';
 	font-weight: bold;
 }
 
@@ -160,7 +156,7 @@ button {
 
 .buttons {
 	margin: 15px;
-	font-family: 'Source Sans Pro';
+	font-family: 'Droid Sans';
 
 }
 

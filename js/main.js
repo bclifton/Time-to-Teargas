@@ -61,6 +61,7 @@ function processGDELT(gdelt) {
 }
 
 function addOverallIndex(data) {
+	// console.log(data);
 
 	// create the new dataset, sorted by date:
 	var newData = {};
@@ -69,10 +70,10 @@ function addOverallIndex(data) {
 
 		var article = {};
 
-		article.headline = d.headline;
-		article.source = d.source;
-		article.url = d.web_url;
-		article.country_1 = d.country_1;
+		article['headline'] = d.headline;
+		article['source'] = d.source;
+		article['url'] = d.web_url;
+		article['country_1'] = d.country_1;
 
 		// if newData does not have date, 1st time through:
 		if(!_.has(newData, date)) {		
@@ -87,13 +88,13 @@ function addOverallIndex(data) {
 	_.each(newData, function(value, date) {
 		var countriesCounter = {};
 		_.each(value, function(entry, index) {
-			entry.article_total = index + 1;
-			if (_.has(countriesCounter, entry.country_1)) {
-				countriesCounter[entry.country_1] += 1;	
+			entry['article_total'] = index + 1;
+			if (_.has(countriesCounter, entry['country_1'])) {
+				countriesCounter[entry['country_1']] += 1;	
 			} else {
-				countriesCounter[entry.country_1] = 1;
+				countriesCounter[entry['country_1']] = 1;
 			}
-			entry.country_article_total = countriesCounter[entry.country_1];
+			entry['country_article_total'] = countriesCounter[entry['country_1']];
 		});
 	});
 
@@ -101,7 +102,7 @@ function addOverallIndex(data) {
 	var finalData = [];
 	_.each(newData, function(value, key) {	
 		_.each(value, function(entry) {
-			entry.date = parseDate(key);
+			entry['date'] = parseDate(key);
 			finalData.push(entry);
 		});
 	});
@@ -180,7 +181,7 @@ function drawGraph(data, timeline, gdelt, target, title) {
 	    .attr('y', 6)
 	    .attr('dy', '0.71em')
 	    .style('text-anchor', 'end')
-	    .text('Number of Articles mentioning "Tear Gas" per Day');
+	    .text('News Articles mentioning "Tear Gas" per Day');
 
 	// svg.call(tip);
 
@@ -193,8 +194,7 @@ function drawGraph(data, timeline, gdelt, target, title) {
 		.attr('y', function(d){ return y(d.article_total); })
 		.attr('width', 2)
 		.attr('height', 8)
-		.style('fill', function(d) {
-			// console.log('article_total: ', d.article_total);
+		.style('fill', function(d) { 
 			if (d.article_total > 10) {
 				return 'rgba(206,39.37,1)';
 			} else {

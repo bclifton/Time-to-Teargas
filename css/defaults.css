@@ -1,0 +1,8 @@
+textarea, input { 
+	outline: none; 
+}
+
+:focus {
+    outline-color: transparent;
+    outline-style: none;
+  }
